@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link href="../build/development/OsxmExtjs6/classic/resources/OsxmExtjs6-all.css" rel="stylesheet" type="text/css" />
+<script>
+	//1.定义用户的视图模型
+	Ext.define('Osxm.view.UserViewModel', {
+		extend : 'Ext.app.ViewModel',
+
+		alias : 'viewmodel.user', // 使用hello获取该model
+
+		data : {
+			firstName : 'chen',
+			lastName : 'oscar'
+		},
+
+		formulas : {
+			// We'll explain formulas in more detail soon.
+			name : function(get) {
+				var fn = get('firstName'), ln = get('lastName');
+				return (fn && ln) ? (fn + ' ' + ln) : (fn || ln || '');
+			}
+		}
+	});
+
+	//2.定义用户的视图组件
+	Ext.define('Osxm.view.UserView', {
+		extend : 'Ext.panel.Panel',
+		layout : 'form',
+
+		viewModel : {
+			type : 'user' // 使用视图模型的alias属性："viewmodel.user"
+		},
+
+		bind : {
+			title : 'Hello {name}'
+		},
+
+		defaultType : 'textfield',
+		items : [ {
+			fieldLabel : 'First Name',
+			bind : '{firstName}'
+		}, {
+			fieldLabel : 'Last Name',
+			bind : '{lastName}'
+		}, {
+			xtype : 'button',
+			text : 'Submit',
+			bind : {
+				hidden : '{!name}'
+			}
+		} ]
+	});
+	//带公式的视图模型
+	Ext.define('Osxm.view.FormulasViewMode', {
+		extend : 'Ext.app.ViewModel',
+		alias : 'viewmodel.formulavm',
+		data : {
+			x : 1,
+			y : 2
+		},
+		formulas : {
+			x2y : function(get) {
+				return get('x2') * get('y');
+			},
+			x2 : function(get) {
+				return get('x') * 2;
+			},
+
+			//显式绑定
+			x3 : {
+				bind : {
+					x : '{x}',
+					y : '{y}'
+				},
+				get : function(data) {
+					return data.x + data.y; //这里是字符串相加
+				}
+			}
+		}
+	});
+</script>
+
+<script>
+	Ext.onReady(function() {
+		Ext.create('Osxm.view.UserView', {
+			renderTo : Ext.getBody(),
+			width : 400
+		});
+
+		Ext.create('Ext.panel.Panel', {
+			title : 'Login Form',
+			width : 200,
+			viewModel : {},
+			renderTo : Ext.getBody(),
+			items : [ {
+				xtype : 'checkbox',
+				boxLabel : 'Manual Login',
+				reference : 'manualLogin'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : 'User Name',
+				bind : {
+					disabled : '{!manualLogin.checked}'
+				}
+			} ]
+		});
+
+		Ext.create('Ext.panel.Panel', {
+			title : 'Formulas View Model',
+			width : 200,
+			viewModel : {
+				type : 'formulavm'
+			},
+			renderTo : Ext.getBody(),
+			defaultType : 'textfield',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'x',
+				bind : '{x}'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : 'y',
+				bind : '{y}'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : 'x*2',
+				bind : '{x2}'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : 'x*2*y',
+				bind : '{x2y}'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : 'x*3',
+				bind : '{x3}'
+			} ]
+		});
+
+	});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
