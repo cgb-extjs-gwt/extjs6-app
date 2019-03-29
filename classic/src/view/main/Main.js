@@ -85,9 +85,9 @@ Ext.define('Extjs6App.view.main.Main', {
     }, {
         title: 'Users',
         iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
+        items: [{
+            xtype: 'responsivePanel'
+        }]
     }, {
         title: 'Groups',
         iconCls: 'fa-users',

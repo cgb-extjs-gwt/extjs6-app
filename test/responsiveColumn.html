@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css" rel="stylesheet" type="text/css" />
+
+
+<script>
+	Ext.onReady(function() {
+		
+		Ext.define('Osxm.view.MyResponsivePanel', {
+		    extend: 'Ext.container.Container',
+		    xtype: 'responsivePanel',
+
+		    requires: [
+		        'Ext.ux.layout.ResponsiveColumn'
+		    ],
+		    layout: 'responsivecolumn',
+		    items: [
+		        {
+		            xtype: 'panel',
+		            userCls: 'big-100'
+		        },
+		        {
+		            xtype: 'panel',
+		            userCls: 'big-50 small-100'
+		        },
+		        {
+		            xtype: 'panel',
+		            userCls: 'big-50 small-100'
+		        }
+		    ]
+		});	
+		
+		Ext.onReady(function() {
+			Ext.create('Osxm.view.MyResponsivePanel', {
+				renderTo : Ext.getBody()
+			});
+		});
+
+	});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

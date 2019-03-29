@@ -85,3 +85,15 @@
     top: 30px;
     right: -24px;
 }
+
+
+
+.big-50 {
+    @include responsivecolumn-item(50%);
+}
+
+ .x-responsivecolumn-small {
+     > .small-100 {
+         @include responsivecolumn-item(100%);
+     }
+}
