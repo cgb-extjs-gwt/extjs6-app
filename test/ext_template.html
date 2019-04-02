@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css" rel="stylesheet" type="text/css" />
+<script>
+	
+</script>
+
+<script>
+	Ext.onReady(function() {
+
+		//json对象
+		var t = new Ext.Template("<div>Hello, {name}</div>");
+		t.append('tmpDiv1', {name:'oscar'});
+		
+		//简单数组				
+		var t = new Ext.Template("<div>Hello, {0}</div>");
+		t.append('tmpDiv2', ['oscar']);
+		
+        //多个HTML片段
+		var t = new Ext.Template(["<div>Hello, {0}</div>",
+			                      ", Nice To Meet You!"
+			                     ]);
+		t.append('tmpDiv2', ['oscar']);
+		
+		
+		var t = new Ext.Template([
+		    '<div name="{id}">',
+		        '<span class="{cls}">{name:trim} {value:ellipsis(6)}</span>',
+		    '</div>',
+		]);
+		t.compile();
+		t.append('tmpDiv2', {id: '001', cls: 'myclass', name: 'Oscar',value:'123456789'});
+		
+		var t = new Ext.Template([
+		    '<div name="{id}">',
+		        '<span class="{cls}">{name:trim} {value:ellipsis(6)}</span>',
+		    '</div>',
+		],
+		{
+			compiled: true,
+		});
+		t.append('tmpDiv2', {id: '001', cls: 'myclass', name: 'Oscar',value:'123456789'});
+		
+		
+		
+		var t = new Ext.Template([
+		    '<div name="{id}">',
+		        '<span class="{cls}">{name:trim} {value:ellipsis(6)}</span>',
+		    '</div>',
+		]);
+		t.compile();
+		t.append('tmpDiv2', {id: '001', cls: 'myclass', name: 'Oscar',value:'123456789'});
+		
+		
+		var tpl=new Ext.XTemplate(  
+                '<table border=1>',  
+                '<tr><td>姓名</td><td>年龄</td><td>COM</td></tr>',  
+                '<tpl for=".">',  
+                '<tr><td>{#}</td><td>{.}</td><td>{.}</td></tr>',  
+                '</tpl>',  
+                '</table>'  
+           ) ;               
+         var tplData=['a','b','c','d','e'];   
+         //tpl.append('tmpDiv2',tplData);  
+	});
+</script>
+
+</head>
+<body>
+<div id="tmpDiv1"></div>
+<div id="tmpDiv2"></div>
+<div id="tmpDiv3"></div>
+</body>
+</html>

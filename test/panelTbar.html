@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css" rel="stylesheet" type="text/css" />
+<script>
+	//类型定义
+</script>
+
+<script>
+	//执行脚本
+	Ext.onReady(function() {
+		Ext.create("Ext.form.Panel", {
+			title : 'Top toolbar Buttons',
+			renderTo : Ext.getBody(),
+			height : 300,
+			width : '100%',
+			scrollable : 'y',
+			defaultType : 'textfield',
+			tbar : [ {
+				xtype : "button",
+				text : 'Button 1'
+			}, '->', {
+				xtype : "button",
+				text : 'Button 2'
+			}, {
+				xtype : "button",
+				text : 'Button 3'
+			}, {
+				xtype : "combobox"
+			} ],
+			items : [ {
+				fieldLabel : 'Attr Name 1',
+				name : 'first',
+				allowBlank : false
+			}, {
+				fieldLabel : 'Attr Name 2',
+				name : 'last',
+				allowBlank : false
+			}, {
+				fieldLabel : 'Attr Name 3',
+				name : 'first',
+				allowBlank : false
+			}, {
+				fieldLabel : 'Attr Name 4',
+				name : 'last',
+				allowBlank : false
+			}, {
+				fieldLabel : 'Attr Name 5',
+				name : 'first',
+				allowBlank : false
+			}, {
+				fieldLabel : 'Attr Name 6',
+				name : 'last',
+				allowBlank : false
+			}, {
+				fieldLabel : 'Attr Name 7',
+				name : 'first',
+				allowBlank : false
+			}, {
+				fieldLabel : 'Attr Name 8',
+				name : 'last',
+				allowBlank : false
+			} ],
+		});
+	});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
