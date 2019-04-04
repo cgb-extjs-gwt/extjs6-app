@@ -12,6 +12,22 @@
 <script>
 	Ext.onReady(function() {
     
+        var users = [
+	        { name: 'User1',  age: 24 },
+	        { name: 'User2',  age: 22 },
+	        { name: 'User3',    age: 24 },
+	        { name: 'User4',   age: 25 },
+	        { name: 'User5', age: 20 }
+	    ];
+		var tpl = new Ext.XTemplate(
+			    '<p>Users: ',
+			    '<tpl for=".">',     
+			        '<p>{#}. {name}</p>', 
+			    '</tpl></p>'
+		);
+		tpl.append('tmpDiv1', users);
+		
+		
 		var data = {
 			    name: 'Employees',
 			    users: [
@@ -22,13 +38,161 @@
 			        { name: 'User5', age: 20 }
 			    ]
 			};
-		var tpl = new Ext.XTemplate(
-			    '<p>Kids: ',
+		tpl = new Ext.XTemplate(
+			    '<p>Users: ',
 			    '<tpl for=".">',     
 			        '<p>{#}. {name}</p>', 
 			    '</tpl></p>'
 	   );
-		
+	   tpl.append('tmpDiv1', data.users);
+	   
+	   
+	   tpl = new Ext.XTemplate(
+			    '<p>Users: ',
+			    '<tpl for="users">',     
+			        '<p>{#}.{name}</p>', 
+			    '</tpl></p>'
+	   );
+	   tpl.append('tmpDiv1', data);
+	   
+	   tpl = new Ext.XTemplate('<tpl for="." between=",">{#}.{name}</tpl>');
+	   tpl.append('tmpDiv1', data.users);
+	   
+       var flatArray = ['User1','User2','User3','User4','User5']
+	   tpl = new Ext.XTemplate('<br>"{.}"的使用：<tpl for="."><p>{.}</p></tpl>');
+	   tpl.append('tmpDiv1', flatArray);
+	   
+	   
+	   // parent 
+		 data = {
+				    name: 'Employees',
+				    users: [
+				        { name: 'User1',  age: 24 },
+				        { name: 'User2',  age: 22 },
+				        { name: 'User3',    age: 24 },
+				        { name: 'User4',   age: 25 },
+				        { name: 'User5', age: 20 }
+				    ]
+				};
+			tpl = new Ext.XTemplate(
+				    '<p>Users: ',
+				    '<tpl for="users">',     
+				        '<p>{#}. {parent.name}-{name}</p>', 
+				    '</tpl></p>'
+		   );
+		   tpl.append('tmpDiv1', data);
+		   
+		 //对对象进行遍历
+			 data = {
+					    name: 'Employees',
+					    users: [
+					        { name: 'User1',  age: 24 },
+					        { name: 'User2',  age: 22 },
+					        { name: 'User3',    age: 24 },
+					        { name: 'User4',   age: 25 },
+					        { name: 'User5', age: 20 }
+					    ]
+					};
+				tpl = new Ext.XTemplate(
+					    '<tpl foreach=".">',     
+					        '<p>{$}={.}</p>', 
+					    '</tpl></p>'
+			   );
+			   tpl.append('tmpDiv1', data);
+			   
+			   //if 条件判断
+			   tpl = new Ext.XTemplate(
+					   '<br>If 条件判断：',
+					    '<tpl for="users">',
+					        //'<tpl if="age &lt; 22">',
+					        //'<tpl if="age &lt;= 22">',
+					        //'<tpl if="age != 22">',
+					        //'<tpl if="age &lt;= 22 && age &gt;= 22">',
+					        '<tpl if="age == 22">',
+					            '<p>{name}</p>',
+					        '</tpl>',
+					    '</tpl></p>'
+					);
+			   tpl.append('tmpDiv1', data);
+			   
+			   //switch case default 条件判断
+			   tpl = new Ext.XTemplate(
+					   '<br>Case 条件判断：',
+					    '<tpl for="users">',
+					        '<tpl switch="name">',
+						        '<tpl case="User1" case="User4">',
+						            '<p>{name}:{age}:Male</p>',
+						        '<tpl default>',
+				                    '<p>{name}:{age}:Female</p>',
+					        '</tpl>',
+					    '</tpl></p>'
+					);
+			   tpl.append('tmpDiv1', data);
+			   
+			   //引号
+			   tpl = new Ext.XTemplate(
+					   '<br>单双引号：',
+					    '<tpl for="users">',
+					        '<tpl if="name == \'User1\'">',
+					            '<p>{name}</p>',
+					        '</tpl>',
+					    '</tpl></p>'
+					);
+			   tpl.append('tmpDiv1', data);
+			   
+			   //数学公式， +-*/
+			   tpl = new Ext.XTemplate(
+					   '<br>数学公式，加减乘除：',
+					    '<tpl for="users">',
+					        '<tpl if="name == \'User1\'">',
+					            '<p>{age+1}</p>',
+					            //'<p>{age-1}</p>',
+					            '<p>{age*2}</p>',
+					            '<p>{age/2}</p>',					            
+					        '</tpl>',
+					    '</tpl></p>'
+					);
+			   tpl.append('tmpDiv1', data);
+			   
+			   //内置对象
+			   data = {
+			    name: 'Employees',
+			    users: [
+			        { name: 'User1',  age: 24 },
+			        { name: 'User2',  age: 22 },
+			        { name: 'User3',    age: 24 },
+			        { name: 'User4',   age: 25 },
+			        { name: 'User5', age: 20 }
+			    ]
+			}
+			 tpl = new Ext.XTemplate(
+					   '<br>内置对象：',
+					   '<p>Name:  {[values.name.toUpperCase()]}</p>',					
+			);
+			 tpl.append('tmpDiv1', data);
+			 
+			 
+			 
+			 //模板成员函数
+			   tpl = new Ext.XTemplate(
+					   '<br>模板成员函数：',
+					    '<tpl for="users">',
+					           '<tpl if="this.isMale(name)">',
+						            '<p>{name}:{age}:Male</p>',
+						        '<tpl else>',
+						            '<p>{name}:{age}:FeMale</p>',
+						        '</tpl>',
+					    '</tpl></p>', 
+					    {
+					        // XTemplate configuration:
+					        disableFormats: true,
+					        isMale: function(name){
+					           return name == 'User1' || name == 'User2';
+					        }
+					    }
+					);
+			   tpl.append('tmpDiv1', data);
+
 	});
 </script>
 
