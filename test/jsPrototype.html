@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Javascript Prototype</title>
+<script>
+var jsStr = "My String";
+var jsObj = {};
+jsObj = new Object();
+
+// alert(jsObj.__proto__===Object.prototype);
+// //对象变量的__proto__属性与Object函数的prototype相同
+// alert(Object.prototype.__proto__); //为空
+
+function jsFunc(name){
+	this.name = name;
+}
+
+
+/*
+ * function myFunc(){ alert("Hello"); } myFunc();
+ */
+
+var myFunc = function(){
+	alert("Hello");
+};
+// myFunc();
+
+function MyClass(name){
+	this.name = name;
+	// this.country = "China";
+}
+var myClassInstance = new MyClass("Oscar");
+MyClass.prototype.country = "China";
+alert(myClassInstance.country);
+// alert(myClassInstance.__proto__===MyClass.prototype);
+// alert(jsObj);
+</script>
+</head>
+<body>
+
+</body>
+</html>

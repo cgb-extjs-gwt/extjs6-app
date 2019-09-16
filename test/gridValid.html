@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+
+<script>
+	
+</script>
+<style>
+.x-fa:before {
+	font-family: FontAwesome !important;
+}
+
+.fa-file-alt:before {
+	content: "\f15c" !important;
+}
+</style>
+<script>
+	var grid = null;
+	function saveFunc() {
+		var allCombobox = grid.query("combobox");
+		var requireCombxMap = {};
+		var valueCombxMap = {};
+		if (allCombobox != null) {
+			for ( var i in allCombobox) {
+				var combobox = allCombobox[i];
+				var comboWidgetColumn = combobox.getWidgetColumn();
+				var comboWidgetRecord = combobox.getWidgetRecord();
+				var dataIndex = comboWidgetColumn.dataIndex;
+				var id = comboWidgetRecord.get("id");
+				if (dataIndex == "require") {
+					requireCombxMap[id] = combobox;
+				} else if (dataIndex == "value") {
+					valueCombxMap[id] = combobox;
+				}
+			}
+		}
+		for ( var id in valueCombxMap) {
+			var valueCombx = valueCombxMap[id];
+			var requiredCombx = requireCombxMap[id];
+			if (valueCombx != null && requiredCombx != null) {
+				var value = valueCombx.getValue();
+				var require = requiredCombx.getValue();
+				if (require != null && require === "Y") {
+					if (value != null && value.length > 0) {
+						//valid
+					} else {
+						isValid = false;
+						valueCombx.markInvalid("Please input value.");
+					}
+				} else {
+					valueCombx.clearInvalid();
+				}
+			}
+		}
+	}
+
+	Ext.onReady(function() {
+		Ext.create('Ext.data.Store', {
+			storeId : 'myStore',
+			fields : [ 'require', 'value' ],
+			data : [ {
+				require : 'Y',
+				value : '1'
+			}, {
+				require : 'Y',
+				value : ''
+			}, {
+				require : 'N',
+				value : ''
+			} ]
+		});
+
+		grid = Ext.create('Ext.grid.Panel', {
+			title : 'My Grid',
+			store : Ext.data.StoreManager.lookup('myStore'),
+			tbar : [ {
+				xtype : 'button',
+				text : 'Save',
+				iconCls : 'x-fa fa-file-alt',
+				handler : saveFunc
+			} ],
+			columns : [ {
+				text : 'Require?',
+				dataIndex : 'require',
+				xtype : 'widgetcolumn',
+				widget : {
+					xtype : 'combobox',
+					store : [ 'Y', 'N' ],
+					bind : '{record.require}'
+				}
+			}, {
+				text : 'Value',
+				dataIndex : 'value',
+				xtype : 'widgetcolumn',
+				widget : {
+					xtype : 'combobox',
+					store : [ '1', '2', '3', '4' ],
+					bind : '{record.value}'
+				}
+			} ],
+			height : 300,
+			width : 400,
+			renderTo : Ext.getBody()
+		});
+	});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

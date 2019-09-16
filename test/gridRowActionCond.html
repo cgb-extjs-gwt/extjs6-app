@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+<style>
+.x-fa:before {
+	font-family: FontAwesome !important;
+}
+
+.fa-trash-alt:before {
+	content: "\f1f8" !important;
+}
+
+.x-item-disabled .my-delete-btn {
+	opacity: 0.3;
+}
+</style>
+<script>
+	
+</script>
+
+<script>
+	Ext.onReady(function() {
+		Ext.create('Ext.data.Store', {
+			storeId : 'myStore',
+			fields : [ 'name', 'editable' ],
+			data : [ {
+				name : 'Zhang San',
+				editable : 'Y'
+			}, {
+				name : 'Li Si',
+				editable : 'N'
+			}, {
+				name : 'Wang Wu',
+				editable : 'Y'
+			} ]
+		});
+
+		Ext.create('Ext.grid.Panel', {
+			title : 'My Grid',
+			selModel : {
+				selType: 'checkboxmodel',
+				listeners:{
+					beforeselect:function ( thisSelModel, record, index, eOpts ) {
+						 if(record.get("editable")!=null&&record.get("editable")==="N"){
+							  return false;
+						  }	 else{
+							  return true;
+						  }   
+					}
+				}
+			},
+			store : Ext.data.StoreManager.lookup('myStore'),
+			columns : [ {
+				width : 30,
+				xtype : 'actioncolumn',
+				items : [ {
+					iconCls : 'x-fa fa-trash-alt my-delete-btn',
+					tooltip : 'Delete Feature',
+					handler : 'delFunc'
+				} ],
+				renderer : function(value, metaData, record) {
+					if (record.get("editable") != null && record.get("editable") === "N") {
+						metaData.tdCls = 'x-item-disabled';
+					}
+				}
+			}, {
+				text : 'Name',
+				dataIndex : 'name'
+			}, {
+				text : 'editable',
+				dataIndex : 'editable'
+			} ],
+			height : 200,
+			width : 400,
+			renderTo : Ext.getBody()
+		});
+	});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

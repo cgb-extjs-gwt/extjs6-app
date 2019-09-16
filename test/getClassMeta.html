@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Get Class Meta</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+<script>
+	var jsobj = {};
+
+	Ext.define('Extjs6App.view.MyPanel', {
+		extend : 'Ext.panel.Panel',
+		xtype : 'myPanel',
+		alias : 'widget.MyPanel',
+		myAttrs : {
+			attr1 : 'value1'
+		}
+	});
+</script>
+
+<script>
+	Ext.onReady(function() {
+		var myPanel = Ext.create('Extjs6App.view.MyPanel');
+		var MyPanelClass = Ext.ClassManager.getByAlias("widget.MyPanel");
+		alert(MyPanelClass.prototype.myAttrs.attr1);
+
+	});
+</script>
+
+</head>
+<body>
+	<div id="tmpDiv1"></div>
+	<div id="tmpDiv2"></div>
+	<div id="tmpDiv3"></div>
+</body>
+</html>

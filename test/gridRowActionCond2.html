@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+<style>
+.x-fa:before {
+	font-family: FontAwesome !important;
+}
+
+.fa-trash-alt:before {
+	content: "\f1f8" !important;
+}
+</style>
+<script>
+	
+</script>
+
+<script>
+	Ext.onReady(function() {
+		Ext.create('Ext.data.Store', {
+			storeId : 'myStore',
+			fields : [ 'name', 'editable' ],
+			data : [ {
+				name : 'Zhang San',
+				editable : 'Y'
+			}, {
+				name : 'Li Si',
+				editable : 'N'
+			}, {
+				name : 'Wang Wu',
+				editable : 'Y'
+			} ]
+		});
+
+		Ext.create('Ext.grid.Panel', {
+			title : 'My Grid',
+			selModel : 'checkboxmodel',
+			store : Ext.data.StoreManager.lookup('myStore'),
+			columns : [ {
+				width : 30,
+				xtype : 'actioncolumn',
+				items : [ {
+					iconCls : 'x-fa fa-trash-alt my-delete-btn',
+					tooltip : 'Delete Feature',
+					handler : 'delFunc'
+				} ]
+			}, {
+				text : 'Name',
+				dataIndex : 'name'
+			}, {
+				text : 'editable',
+				dataIndex : 'editable'
+			} ],
+			height : 200,
+			width : 400,
+			renderTo : Ext.getBody()
+		});
+	});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
