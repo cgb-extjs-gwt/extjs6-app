@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+<script>
+	
+</script>
+
+<script>
+	Ext.onReady(function() {
+
+		var tabsCfg = [];
+		for (var i = 1; i < 10; i++) {
+			tabsCfg.push({
+				title : 'Tab '+i,
+				html : 'Tab '+i
+			})
+		}
+		Ext.create('Ext.tab.Panel', {
+			width : 400,
+			height : 400,
+			renderTo : document.body,
+			items : tabsCfg
+		});
+	});
+</script>
+
+</head>
+<body>
+	<div id="tmpDiv1"></div>
+	<div id="tmpDiv2"></div>
+	<div id="tmpDiv3"></div>
+</body>
+</html>
