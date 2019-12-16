@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>View Model</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+
+<script>
+	
+</script>
+
+<script>
+	Ext.onReady(function() {
+
+		var states = Ext.create('Ext.data.Store', {
+			fields : [ 'abbr', 'name' ],
+			data : [
+			//{"abbr":"AL", "name":"Alabama"},
+			{
+				"abbr" : "AK",
+				"name" : "Alaska"
+			}, {
+				"abbr" : "AZ",
+				"name" : "Arizona"
+			} ]
+		});
+
+		var viewModel = new Ext.app.ViewModel({
+			data : {
+				abbr : 'AL'
+			}
+		});
+
+		// Create the combo box, attached to the states data store
+		var combox = Ext.create('Ext.form.ComboBox', {
+			fieldLabel : 'Choose State',
+			store : states,
+			viewModel : viewModel,
+			queryMode : 'local',
+			displayField : 'name',
+			valueField : 'abbr',
+			bind : {
+				value : '{abbr}'
+			},
+			listeners : {
+				change : function() {
+					alert("change");
+				},
+				beforeselect : function(combo, record, eOpts) {
+					var oldValue = combo.getValue();
+					var newValue = record.get("abbr");
+					//alert("oldValue="+oldValue);
+					//alert("newValue="+newValue);
+					alert("beforeselect");
+				}
+			},
+			renderTo : Ext.getBody()
+		});
+
+		var store = combox.getStore();
+		store.add({
+			"abbr" : "AL",
+			"name" : "Alabama"
+		});
+		//combox.setValue("AL");
+	});
+</script>
+
+</head>
+<body>
+	<div id="tmpDiv1"></div>
+	<div id="tmpDiv2"></div>
+	<div id="tmpDiv3"></div>
+</body>
+</html>

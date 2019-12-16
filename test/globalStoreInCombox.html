@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ExtJS6 Sample</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+<script>
+	//类型定义
+</script>
+
+<script>
+	//执行脚本
+	Ext.onReady(function() {
+		var myStore = Ext.create('Ext.data.Store', {
+			storeId : 'myStore',
+			fields : [ 'name' ],
+			data : [ {
+				name : 'name1'
+			}, {
+				name : 'name11'
+			}, {
+				name : 'name21'
+			}, {
+				name : 'name22'
+			}, {
+				name : 'name3'
+			}, {
+				name : 'name31'
+			} ]
+		});
+
+		Ext.create('Ext.form.ComboBox', {
+			fieldLabel : 'Conbox 1',
+			store : 'myStore',
+			queryMode : 'local',
+			displayField : 'name',
+			valueField : 'name',
+			renderTo : 'div1'
+		});
+
+		Ext.create('Ext.form.ComboBox', {
+			fieldLabel : 'Conbox 2',
+			store : 'myStore',
+			queryMode : 'local',
+			displayField : 'name',
+			valueField : 'name',
+			renderTo : 'div2'
+		});
+
+		Ext.create('Ext.data.Store', {
+			storeId : 'simpsonsStore',
+			fields : [ 'name', 'email', 'phone' ],
+			data : [ {
+				name : 'Lisa',
+				email : 'lisa@simpsons.com',
+				phone : '555-111-1224'
+			}, {
+				name : 'Bart',
+				email : 'bart@simpsons.com',
+				phone : '555-222-1234'
+			}, {
+				name : 'Homer',
+				email : 'homer@simpsons.com',
+				phone : '555-222-1244'
+			}, {
+				name : 'Marge',
+				email : 'marge@simpsons.com',
+				phone : '555-222-1254'
+			} ]
+		});
+
+		Ext.create('Ext.grid.Panel', {
+			title : 'Simpsons',
+			store : Ext.data.StoreManager.lookup('simpsonsStore'),
+			columns : [
+					{
+						text : 'Name',
+						dataIndex : 'name',
+						xtype : 'widgetcolumn',
+						width : 300,
+						widget : {
+							xtype : 'combobox',
+							minChars : 0,
+							queryMode : 'local',
+							displayField : 'name',
+							valueField : 'name',
+							//forceSelection:true,
+							store : 'myStore',
+							validator : function(val) {
+								var isValid = false;
+								var myStore = Ext.data.StoreManager
+										.lookup('myStore');
+								if (myStore != null && myStore.getCount() > 0) {
+									var iCount = myStore.getCount();
+									for (var i = 0; i < iCount; i++) {
+										var model = myStore.getAt(i);
+										var name = model.get("name");
+										if (name == val) {
+											isValid = true;
+											break;
+										}
+									}
+								}
+								return isValid == true ? true : val
+										+ " is invalid Value.";
+							}
+						}
+					}, {
+						text : 'Email',
+						dataIndex : 'email',
+						flex : 1
+					}, {
+						text : 'Phone',
+						dataIndex : 'phone'
+					} ],
+			height : 600,
+			width : 800,
+			renderTo : 'div3'
+		});
+	});
+</script>
+
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div id="div3"></div>
+</body>
+</html>
