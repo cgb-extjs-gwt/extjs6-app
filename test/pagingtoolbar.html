@@ -4,45 +4,47 @@
 <meta charset="UTF-8">
 <title>ExtJS6 Sample</title>
 <script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
-<link href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css" rel="stylesheet" type="text/css" />
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
 <script>
 	//类型定义
 </script>
 
 <script>
-    //执行脚本
+	//执行脚本
 	Ext.onReady(function() {
-		
+
 		Ext.create('Ext.grid.Panel', {
-		    title: 'Simpsons',
-		    width: 800,
-		    height: 125,
-		    renderTo: Ext.getBody(),
+			title : 'Simpsons',
+			width : 800,
+			height : 125,
+			renderTo : Ext.getBody(),
 
-		    store: null,
+			store : null,
 
-		    columns: [{
-		        text: 'Name',
-		        dataIndex: 'name'
-		    }, {
-		        text: 'Email',
-		        dataIndex: 'email',
-		        flex: 1
-		    }, {
-		        text: 'Phone',
-		        dataIndex: 'phone'
-		    }],
+			columns : [ {
+				text : 'Name',
+				dataIndex : 'name'
+			}, {
+				text : 'Email',
+				dataIndex : 'email',
+				flex : 1
+			}, {
+				text : 'Phone',
+				dataIndex : 'phone'
+			} ],
 
-		    tbar: {
-		        xtype: 'pagingtoolbar',
-		        displayInfo: true,
-		        //prependButtons:true,
-		        items:[{
-		        	xtype:'button',
-		        	text:'Button 1'
-		        }]
-		        
-		    }
+			tbar : {
+				xtype : 'pagingtoolbar',
+				displayInfo : true,
+				//prependButtons:true,
+				items : [ {
+					xtype : 'button',
+					text : 'Button 1'
+				} ]
+
+			}
 		});
 	});
 </script>

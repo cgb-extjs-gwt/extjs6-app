@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ExtJS6 Sample</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+<script>
+	//类型定义
+</script>
+
+<script>
+	//执行脚本
+	Ext.onReady(function() {
+		Ext.create('Ext.form.Panel', {
+			title : 'On The Wall',
+			width : 300,
+			bodyPadding : 10,
+			renderTo : Ext.getBody(),
+			items : [ {
+				xtype : 'numberfield',
+				anchor : '100%',
+				name : 'bottles',
+				mouseWheelEnabled : false, //鼠标滚动是否改动值
+				fieldLabel : 'Bottles of Beer',
+				value : 99,
+				maxValue : 99,
+				minValue : 0
+			} ],
+			buttons : [ {
+				text : 'Take one down, pass it around',
+				handler : function() {
+					this.up('form').down('[name=bottles]').spinDown();
+				}
+			} ]
+		});
+	});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

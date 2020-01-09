@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ExtJS6 Sample</title>
+<script type="text/javascript" src="../ext/build/ext-all-debug.js"></script>
+<link
+	href="../build/development/Extjs6App/classic/resources/Extjs6App-all.css"
+	rel="stylesheet" type="text/css" />
+<script>
+	//类型定义
+</script>
+
+<script>
+	//执行脚本
+	Ext.onReady(function() {
+		var gridStore = Ext.create('Ext.data.Store', {
+			storeId : 'simpsonsStore',
+			fields : [ 'name', 'email', 'phone', 'age' ],
+			data : [ {
+				name : 'Lisa',
+				email : 'lisa@simpsons.com',
+				phone : '555-111-1224',
+				age : '1'
+			}, {
+				name : 'Bart',
+				email : 'bart@simpsons.com',
+				phone : '555-222-1234'
+			}, {
+				name : 'Homer',
+				email : 'homer@simpsons.com',
+				phone : '555-222-1244'
+			}, {
+				name : 'Marge',
+				email : 'marge@simpsons.com',
+				phone : '555-222-1254'
+			} ]
+		});
+
+		Ext.create('Ext.grid.Panel', {
+			title : 'Simpsons',
+			store : Ext.data.StoreManager.lookup('simpsonsStore'),
+			tbar : [ {
+				xtype : 'button',
+				text : 'Button 1',
+				handler : function() {
+					var modifyModels = gridStore.getModifiedRecords();
+					alert(modifyModels.length);
+				}
+			} ],
+			columns : [ {
+				text : 'Name',
+				dataIndex : 'name'
+			}, {
+				text : 'Email',
+				dataIndex : 'email',
+				flex : 1
+			}, {
+				text : 'Phone',
+				dataIndex : 'phone'
+			}, {
+				text : 'Age',
+				dataIndex : 'age',
+				xtype : 'widgetcolumn',
+				widget : {
+					xtype : 'numberfield',
+					maxValue : 1,
+					mouseWheelEnabled : false,
+					minValue : 0,
+					bind : '{record.age}'
+				}
+			} ],
+			height : 500,
+			width : 800,
+			renderTo : Ext.getBody()
+		});
+	});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
