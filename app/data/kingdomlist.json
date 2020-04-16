@@ -1,0 +1,23 @@
+{
+	"total": 1,
+	"datas": [
+		{
+			"id": 1,
+			"name": "Shu",
+			"generals": [
+				{
+					"id": 100,
+					"full": "Liu Bei"
+				},
+				{
+					"id": 101,
+					"full": "Guan Yu"
+				},
+				{
+					"id": 102,
+					"full": "Zhang Fei"
+				}
+			]
+		}
+	]
+}

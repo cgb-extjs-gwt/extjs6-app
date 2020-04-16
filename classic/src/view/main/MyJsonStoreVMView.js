@@ -1,4 +1,4 @@
-Ext.define('Osxm.main.myJsonStoreVMView', {
+Ext.define('Extjs6App.view.main.myJsonStoreVMView', {
 	extend : 'Ext.panel.Panel',
 	xtype : 'myJsonStoreVMView',
 

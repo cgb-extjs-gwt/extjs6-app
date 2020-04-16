@@ -10,15 +10,12 @@ Ext.define('Extjs6App.view.main.Main', {
 	extend : 'Ext.tab.Panel',
 	xtype : 'app-main',
 
-	requires : [ 'Ext.plugin.Viewport', 'Ext.window.MessageBox',
-
-	'Extjs6App.view.main.MainController', 'Extjs6App.view.main.MainModel', 'Extjs6App.view.main.List' ],
+	requires : [ 'Ext.plugin.Viewport', 'Ext.window.MessageBox', 'Extjs6App.view.main.MainController',
+			'Extjs6App.view.main.MainModel', 'Extjs6App.view.main.List' ],
 
 	controller : 'main',
 	viewModel : 'main',
-
-	ui : 'navigation',
-
+	// ui : 'navigation',
 	tabBarHeaderPosition : 1,
 	titleRotation : 0,
 	tabRotation : 0,
@@ -33,7 +30,7 @@ Ext.define('Extjs6App.view.main.Main', {
 			},
 			flex : 0
 		},
-		iconCls : 'fa-th-list'
+		iconCls : 'x-fa fa-th-list'
 	},
 
 	tabBar : {
@@ -73,7 +70,7 @@ Ext.define('Extjs6App.view.main.Main', {
 
 	items : [ {
 		title : 'Home',
-		iconCls : 'fa-home',
+		iconCls : 'x-fa fa-home',
 		// The following grid shares a store with the classic version's grid as
 		// well!
 		items : [ {
@@ -81,33 +78,27 @@ Ext.define('Extjs6App.view.main.Main', {
 		} ]
 	}, {
 		title : 'My ResponsiveColumn Panel',
-		iconCls : 'fa-user',
-		items : [ {
+		iconCls : 'x-fa fa-user',
+		items : {
 			xtype : 'myResponsivePanel'
-		} ]
-	},{
+		}
+	}, {
 		title : 'JsonStore ViewModel View',
-		iconCls : 'fa-user',
-		items : [ {
+		iconCls : 'x-fa fa-user',
+		items : {
 			xtype : 'myJsonStoreVMView'
-		} ]
-	}, {
-		title : 'Users',
-		iconCls : 'fa-user',
-		bind : {
-			html : '{loremIpsum}'
 		}
 	}, {
-		title : 'Groups',
-		iconCls : 'fa-users',
-		bind : {
-			html : '{loremIpsum}'
+		title : 'JsonStore ViewModel View',
+		iconCls : 'x-fa fa-user',
+		items : {
+			xtype : 'myJsonStoreVMView'
 		}
-	}, {
-		title : 'Settings',
-		iconCls : 'fa-cog',
-		bind : {
-			html : '{loremIpsum}'
+	} ,{
+		title : 'Data,Model演示',
+		iconCls : 'x-fa fa-user',
+		items : {
+			xtype : 'ModelDemoView'
 		}
-	} ]
+	}]
 });
